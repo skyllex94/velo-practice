@@ -1,0 +1,15 @@
+h2 {
+    text-align: center;
+    margin-top: 50px;
+}
+
+#map {
+    height: 500px;
+    width: 800px; 
+    margin: auto;
+   }
+
+   body{
+       margin: 0px;
+       padding: 0px;
+   }

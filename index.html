@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.js"></script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAPdXVw6PD2TSM2LmhysSY-N5Y56w-Fzjc&callback=initMap">
+    </script>
+  </head>
+  <body>
+    <h2>Вело Локации</h2>
+    <div id="map"></div>
+    <script>
+        function initMap() {
+            
+            var sofia = {lat: 42.694954, lng: 23.323022};
+            
+            var map = new google.maps.Map(
+                document.getElementById('map'), 
+                {zoom: 10, center: sofia});
+
+            var marker = new google.maps.Marker({position: sofia,
+            map: map});
+            }
+
+           /* $.getJSON(url='https://velo-guide-rest.azurewebsites.net/api/geopoints', function(data){
+                console.log(data);
+            }); */
+
+            $.ajax({
+                url:'https://velo-guide-rest.azurewebsites.net/api/geopoints',
+                dataType: 'json',
+                type: 'get',
+                cache: false,
+                success: function(data){
+                    
+                    $(data).each(function(index, value){
+
+                        console.log(value);
+                        
+
+                        var marker = new google.maps.Marker
+                            ({position: new google.maps.LatLng(value.latitude, value.longtitude),
+                            map: map});
+                        
+                        
+                        //showAllVeloNames(value);
+                    });
+                    
+                }
+                });
+
+
+
+                /* function getLatitude(lat){
+                     
+                     $.ajax({
+                        url:'https://velo-guide-rest.azurewebsites.net/api/geopoints',
+                        dataType: 'json',
+                        type: 'get',
+                        cache: false,
+                        success: function(data){
+                        
+                        $(data).each(function(index, value){
+                        
+                        return value.latitude;
+                        });
+                        }
+                    });
+                 }
+                 */
+
+                 function showAllVeloMarkers(lat){
+                        Array.prototype.forEach.call(allData, function(data){
+                            console.log('Functional');
+
+                            var marker = new google.maps.Marker
+                            ({position: new google.maps.LatLng(data.lat, data.lng),
+                            map: map});
+                        });
+                    }
+
+    </script>
+  </body>
+</html>
