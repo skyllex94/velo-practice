@@ -37,14 +37,22 @@
                     $(data).each(function(index, value){
 
                         console.log(value);
+
+                        /* 
+
+                        var position = {lat: value.latitude,lng: value.longtitude};
                         
+                        var marker = new google.maps.Marker ({position: position,
+                            map: map});
+
+                        */
 
                         var marker = new google.maps.Marker
                             ({position: new google.maps.LatLng(value.latitude, value.longtitude),
                             map: map});
                         
                         
-                        //showAllVeloNames(value);
+                        //showAllVeloMarkers(lat);
                     });
                     
                 }
